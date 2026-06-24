@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hextris</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/img/icon-192.png">
+<meta name="theme-color" content="#00BCD4">
+</head>
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register("/service-worker.js")
+                .then(() => {
+
+                    console.log(
+                        "Service Worker registrado"
+                    );
+
+                });
+
+        }
+    );
+}
+
+</script>
+
+<body>
+
+<div class="container">
+
+    <header>
+
+        <h1>HEXTRIS</h1>
+
+        <div class="score-panel">
+            <div class="score-box">
+                <span>Puntos</span>
+                <h2 id="score">0</h2>
+                
+            </div>
+
+            <button id="restartBtn">
+                Reiniciar
+            </button>
+        </div>
+
+    </header>
+
+    <main>
+
+        <canvas id="gameCanvas"
+                width="700"
+                height="700">
+        </canvas>
+
+    </main>
+
+</div>
+
+<!-- Modal Game Over -->
+
+<div id="gameOverModal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>GAME OVER</h2>
+
+        <p>
+            Puntaje Final:
+            <span id="finalScore">0</span>
+        </p>
+
+        <button id="playAgainBtn">
+            Jugar otra vez
+        </button>
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/game.js}"></script>
+
+</body>
+</html>
