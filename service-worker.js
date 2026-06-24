@@ -1,10 +1,10 @@
 const CACHE_NAME = "hextris-v1";
 
 const urlsToCache = [
-    "/",
-    "/css/style.css",
-    "/js/game.js",
-    "/manifest.webmanifest"
+    "./",
+    "./css/style.css",
+    "./js/game.js",
+    "./manifest.webmanifest"
 ];
 
 self.addEventListener("install", event => {
