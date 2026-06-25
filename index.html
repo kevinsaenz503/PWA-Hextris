@@ -1,13 +1,122 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head> <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>Hextris</title>
-<link rel="stylesheet" href="./css/style.css">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./img/icon-192.png">
-<meta name="theme-color" content="#00BCD4">
+
+<link rel="stylesheet"
+      href="./css/style.css">
+
+<link rel="manifest"
+      href="./manifest.webmanifest">
+
+<link rel="icon"
+      href="./img/icon-192.png">
+
+<meta name="theme-color"
+      content="#00BCD4">
+
 </head>
+
+<body>
+
+<!-- PANTALLA INICIAL -->
+
+<div id="startScreen">
+
+    <h1>HEXTRIS</h1>
+
+    <p>
+        Récord:
+        <span id="menuHighScore">
+            0
+        </span>
+    </p>
+
+    <button id="startGameBtn">
+        ▶ Iniciar Juego
+    </button>
+
+</div>
+
+<div class="container">
+
+    <!-- CABECERA DEL JUEGO -->
+
+    <header id="gameHeader"
+            style="display:none;">
+
+        <h1>HEXTRIS</h1>
+
+        <div class="score-panel">
+
+            <div class="score-box">
+
+                <span>Puntos</span>
+
+                <h2 id="score">
+                    0
+                </h2>
+
+            </div>
+
+            <button id="restartBtn">
+                Reiniciar
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- JUEGO -->
+
+    <main id="gameArea"
+          style="display:none;">
+
+        <canvas id="gameCanvas"
+                width="700"
+                height="700">
+
+        </canvas>
+
+    </main>
+
+</div>
+
+<!-- GAME OVER -->
+
+<div id="gameOverModal"
+     class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>
+            GAME OVER
+        </h2>
+
+        <p>
+
+            Puntaje Final:
+
+            <span id="finalScore">
+                0
+            </span>
+
+        </p>
+
+        <button id="playAgainBtn">
+            Jugar otra vez
+        </button>
+
+    </div>
+
+</div>
+
 <script>
 
 if ("serviceWorker" in navigator) {
@@ -17,7 +126,9 @@ if ("serviceWorker" in navigator) {
         () => {
 
             navigator.serviceWorker
-                .register("./service-worker.js")
+                .register(
+                    "./service-worker.js"
+                )
                 .then(() => {
 
                     console.log(
@@ -30,96 +141,69 @@ if ("serviceWorker" in navigator) {
     );
 }
 
-</script>
+/* MOSTRAR RECORD */
 
-<body>
+window.addEventListener(
+    "load",
+    () => {
 
-<div class="container">
+        document
+            .getElementById(
+                "menuHighScore"
+            )
+            .textContent =
+            localStorage.getItem(
+                "hextrisHighScore"
+            ) || 0;
 
-    <header>
+    }
+);
 
-        <h1>HEXTRIS</h1>
+/* INICIAR JUEGO */
 
-        <div class="score-panel">
-            <div class="score-box">
-                <span>Puntos</span>
-                <h2 id="score">0</h2>
-                
-            </div>
-
-            <button id="restartBtn">
-                Reiniciar
-            </button>
-        </div>
-
-    </header>
-    
-<div id="startScreen">
-
-    <h2>Bienvenido a Hextris</h2>
-
-    <button id="startGameBtn">
-        ▶ Iniciar Juego
-    </button>
-
-</div>
-    
-    <main id="gameArea" style="display:none;">
-
-        <canvas id="gameCanvas"
-                width="700"
-                height="700">
-        </canvas>
-
-    </main>
-
-</div>
-
-<!-- Modal Game Over -->
-
-<div id="gameOverModal" class="modal hidden">
-
-    <div class="modal-content">
-
-        <h2>GAME OVER</h2>
-
-        <p>
-            Puntaje Final:
-            <span id="finalScore">0</span>
-        </p>
-
-        <button id="playAgainBtn">
-            Jugar otra vez
-        </button>
-
-    </div>
-
-</div>
-    <script>
-
-document
-.getElementById("startGameBtn")
-.addEventListener(
-"click",
-() => {
+function launchGame() {
 
     document
-    .getElementById("startScreen")
-    .style.display =
-    "none";
+        .getElementById(
+            "startScreen"
+        )
+        .style.display =
+        "none";
 
     document
-    .getElementById("gameArea")
-    .style.display =
-    "block";
+        .getElementById(
+            "gameArea"
+        )
+        .style.display =
+        "block";
+
+    document
+        .getElementById(
+            "gameHeader"
+        )
+        .style.display =
+        "flex";
 
     startHextris();
 
-});
+}
 
 </script>
-    
+
 <script src="./js/game.js"></script>
+
+<script>
+
+document
+    .getElementById(
+        "startGameBtn"
+    )
+    .addEventListener(
+        "click",
+        launchGame
+    );
+
+</script>
 
 </body>
 </html>
