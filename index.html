@@ -53,8 +53,18 @@ if ("serviceWorker" in navigator) {
         </div>
 
     </header>
+    
+<div id="startScreen">
 
-    <main>
+    <h2>Bienvenido a Hextris</h2>
+
+    <button id="startGameBtn">
+        ▶ Iniciar Juego
+    </button>
+
+</div>
+    
+    <main id="gameArea" style="display:none;">
 
         <canvas id="gameCanvas"
                 width="700"
@@ -85,7 +95,30 @@ if ("serviceWorker" in navigator) {
     </div>
 
 </div>
+    <script>
 
+document
+.getElementById("startGameBtn")
+.addEventListener(
+"click",
+() => {
+
+    document
+    .getElementById("startScreen")
+    .style.display =
+    "none";
+
+    document
+    .getElementById("gameArea")
+    .style.display =
+    "block";
+
+    startHextris();
+
+});
+
+</script>
+    
 <script src="./js/game.js"></script>
 
 </body>
