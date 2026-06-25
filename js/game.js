@@ -729,4 +729,10 @@ function draw() {
    INICIAR JUEGO
 ========================= */
 
-draw();
+function startHextris() {
+
+    restartGame();
+
+    draw();
+
+}
